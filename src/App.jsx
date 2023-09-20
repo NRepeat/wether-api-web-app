@@ -1,12 +1,10 @@
-import reactLogo from "./assets/react.svg";
 import Home from "./page/Home";
-import viteLogo from "/vite.svg";
 
 function App() {
   return (
-    <>
+    <div className="w-full h-screen">
       <Home />
-    </>
+    </div>
   );
 }
 

@@ -5,19 +5,27 @@ import { fetchCurentWeather } from "../../redux/slice/weatherSlice";
 
 function WeatherDashboard() {
   const dispatch = useDispatch();
-  const { weather:weatherData } = useSelector((state) => state.weather);
-  console.log("🚀 ~ file: index.jsx:9 ~ WeatherDashboard ~ weatherData:", weatherData)
+  const { weather: weatherData } = useSelector((state) => state.weather);
+  console.log(
+    "🚀 ~ file: index.jsx:9 ~ WeatherDashboard ~ weatherData :",
+    weatherData
+  );
 
   useEffect(() => {
-    dispatch(fetchCurentWeather());
+    try {
+      dispatch(fetchCurentWeather());
+    } catch (error) {
+    console.log("🚀 ~ file: index.jsx:18 ~ useEffect ~ error:", error)
+    }
   }, []);
-  const getWeather = () => {
-    dispatch(fetchCurentWeather());
+
+  const getWeather = async() => {
+   await dispatch(fetchCurentWeather());
   };
 
   return (
     <div>
-			<WeatherCard weatherData={weatherData}/>
+      {weatherData.current_weather ? <WeatherCard weatherData={weatherData} /> : <p>Loading</p>}
       <button onClick={getWeather}>Get</button>
     </div>
   );

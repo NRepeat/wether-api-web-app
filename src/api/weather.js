@@ -6,7 +6,6 @@ const WeatherApi = {
 	getWeather: async () => {
 		try {
 			const { data } = await axios.get(WeatherApiUrl)
-			console.log("🚀 ~ file: weather.js:9 ~ getWeather: ~ data:", data)
 			return data
 		} catch (error) {
 			console.error(error)
