@@ -5,8 +5,9 @@ const SLICE_NAME = "weather"
 
 export const fetchCurentWeather = createAsyncThunk(`${SLICE_NAME}/getWeather`,
 	async (values, thunkApi) => {
+
 		try {
-			const weather = await Api.WeatherApi.getWeather();
+			const weather = await Api.WeatherApi.getWeather(values);
 			return weather;
 		} catch (error) {
 			console.error(error);
@@ -18,12 +19,22 @@ const initialState = {
 	weather: {},
 	isLoading: false,
 	error: null,
+	temperatureUnit: 'celsius',
+	forecastDuration: '7'
 };
 
 export const weatherSlice = createSlice({
 	name: SLICE_NAME,
 	initialState,
-	reducers: {},
+	reducers: {
+		setTemperatureUnit: (state, action) => {
+			state.temperatureUnit = action.payload
+		},
+		setForecastDuration: (state, action) => {
+			state.forecastDuration = action.payload
+		}
+
+	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchCurentWeather.pending, (state) => {
 			state.isLoading = true;
@@ -41,6 +52,9 @@ export const weatherSlice = createSlice({
 	},
 });
 
+
 const { reducer: weatherReducer } = weatherSlice;
+
+export const { setTemperatureUnit,setForecastDuration } = weatherSlice.actions
 
 export default weatherReducer;
