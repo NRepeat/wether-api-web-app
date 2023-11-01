@@ -7,7 +7,6 @@ export default function CurrentWeatherCard({ weatherData }) {
     weatherData
   );
 	const temperatureUnit = useSelector((state) => state.weather.temperatureUnit);
-  console.log("🚀 ~ file: index.jsx:10 ~ CurrentWeatherCard ~ temperatureUnit:", temperatureUnit)
   return (
     <div className="flex justify-center ">
       <div>

@@ -6,6 +6,7 @@ import CurrentWeatherCard from "../CurrentWeatherCard";
 import WeatherFilter from "../Filters";
 import { createSelector } from "reselect";
 import WeatherHourlyData from "../WeatherHourlyData";
+import WeatherComponent from "../Test/test";
 
 function WeatherDashboard() {
   const dispatch = useDispatch();
@@ -30,12 +31,14 @@ function WeatherDashboard() {
       console.log("🚀 ~ file: index.jsx:18 ~ useEffect ~ error:", error);
     }
   };
-
+  useEffect(() => {
+    getWeather();
+  }, []);
   useEffect(() => {
     if (filtr !== prevFiltr) {
       getWeather();
     }
-  }, [ prevFiltr]);
+  }, [prevFiltr]);
 
   return (
     <div className="w-full h-full flex flex-col justify-center">
@@ -44,7 +47,7 @@ function WeatherDashboard() {
           <WeatherFilter />
           <CurrentWeatherCard weatherData={weatherData} />
           <DailyWeatherCard weatherData={weatherData} />
-					<WeatherHourlyData weatherData={weatherData} />
+          <WeatherHourlyData weatherData={weatherData} />
         </>
       ) : (
         <p>Loading</p>
